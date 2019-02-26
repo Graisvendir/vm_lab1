@@ -26,7 +26,8 @@ public class GaussMethodWithMainElement {
 
     /**
      * Не тестить
-     * Куча копирований матриц и векторов для дальнейшей работы
+     * Копирует @see A в @see trA, @see inpA
+     * Копирует @see b в @see trB
      */
     public void init() {
         trA = new double[n][n];
@@ -50,6 +51,7 @@ public class GaussMethodWithMainElement {
      * Можно тестить
      * Ищет максимальный элемент в столбцах и переносит их на главную диагональ
      * перетаскивая всю строчку матрицы
+     * Изменяет @see trA
      * Использует trA как источник матрицы и determ для домножения на -1
      */
     public void moveToMainDiag() {
@@ -74,8 +76,8 @@ public class GaussMethodWithMainElement {
     /**
      * Можно потестить
      * меняет местами строчки с номерами i и j
-     * в матрицах trA, A, E
-     * и векторах trB, B,
+     * в матрицах @see trA, @see A, @see E
+     * и векторах @see trB, @see B,
      *
      * @param i верхняя строчка
      * @param j нижняя строчка
@@ -104,8 +106,8 @@ public class GaussMethodWithMainElement {
 
     /**
      * Можно потестить
-     * приводим матрицы trA, E к треугольному виду
-     * вектор trB меняется одновременно с ними
+     * приводим матрицы @see trA, @see E к треугольному виду
+     * вектор @see trB меняется одновременно с ними
      */
     public void formTriangle() {
         for (int i = 0; i < n - 1; i++)
@@ -124,7 +126,7 @@ public class GaussMethodWithMainElement {
     /**
      * Можно потестить
      * Проверка обратной матрицы,
-     * что при перемножении inpA и revA получается E
+     * что при перемножении @see inpA и @see revA получается @see E
      */
     public void checkReverseMatrix() {
         System.out.print("Checking:\n");
@@ -143,7 +145,7 @@ public class GaussMethodWithMainElement {
 
     /**
      * Можно потестить
-     * Транспонирует поданную матрицу
+     * Транспонирует поданную матрицу @see
      *
      * @param matr квадратная матрица
      * @return квадратная транспонированная матрица
@@ -159,7 +161,7 @@ public class GaussMethodWithMainElement {
     }
 
     /**
-     * ищем результат trA * r = rB
+     * ищем результат @see trA * r = @see rB
      *
      * @param rB вектор в правой части системы линейных уравнений
      * @return результирующий вектор
@@ -177,7 +179,7 @@ public class GaussMethodWithMainElement {
 
     /**
      * Можно потестить
-     * вычисляем вектор невязки как nevVect = b - A * x
+     * вычисляем вектор невязки как @see nevVect = @see b - @see A * @see x
      */
     public void vectNev() {
         if (determ != 0) {
@@ -192,11 +194,11 @@ public class GaussMethodWithMainElement {
 
     /**
      * можно потестить
-     * ищем определитель входнйо матрицы
+     * ищем определитель входной матрицы
      *
      * @param triangl квадратная матрица, приведенная к треугольнмоу виду
      *
-     *                результат кладется в determ
+     *                результат кладется в @see determ
      */
     public void findDeterminant(double[][] triangl) {
         for (int i = 0; i < n; i++)
@@ -206,6 +208,15 @@ public class GaussMethodWithMainElement {
     /**
      * не тестировать(хотя на самом деле можно позаморачиваться)
      * Основной кусок, сдесь собраны все вычисления
+     * 
+     * Проводит копирование элементов @see init()
+     * Переносит элементы на главную диагональ @see moveToMainDiag()
+     * Приводит к треугольной форме матрицы @see formTriangle()
+     * Ищет определитель матрицы @see trA в @see findDeterminant(trA)
+     *      если определитель != 0, то выполняем дальше
+     *          ищем результат @see result() и пишем его в @see x
+     *          находим вектор невязки @see vectNev()
+     *          ищем обратную матрицу и проверяем ее на правильность через @see checkReverseMatrix
      */
     public void findResult() {
         init();
